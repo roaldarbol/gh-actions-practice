@@ -15,11 +15,11 @@ jobs:
         fetch-depth: '0'
 
     - name: Create Release Folder
-      run: rsync -arv --exclude='.git/' --exclude='.github/' --exclude='.gitignore' . ./release
+      run: rsync -arv --exclude='.git/' --exclude='.github/' --exclude='.gitignore' . ./dist
     
     - name: Switch to Release Folder
       run: |
-        cd release
+        cd dist
         ls -la
     
     - uses: actions-ecosystem/action-get-latest-tag@v1
@@ -36,43 +36,4 @@ jobs:
         RELEASE_NAME: "gh-actions-practice ${{ steps.get-latest-tag.outputs.tag }}"
       with:
         args: |
-          release/gh-actions-practice-${{ steps.get-latest-tag.outputs.tag }}.zip
-
-
-# name: Release
-# on:
-#   push:
-#     tags:
-#       - "v[0-9]+.[0-9]+.[0-9]+"
-
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     steps:
-
-#     - name: Checkout repository
-#       uses: actions/checkout@v3
-#       with:
-#         ref: ${{ github.sha }}
-#         fetch-depth: '0'
-
-#     - name: Create Release Folder
-#       run: rsync -arv --exclude='.git/' --exclude='.github/' --exclude='.gitignore' . ./release
-    
-#     - name: Switch to Release Folder
-#       run: |
-#         cd release
-#         ls -la
-    
-#     - name: Bump version and push tag
-#       uses: anothrNick/github-tag-action@master
-#       env:
-#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         WITH_V: true
-
-#     - name: Get tag
-#       id: get_tag
-#       run: |
-#         echo "name=TAG::${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
-#         echo "name=VERSION::${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
-    
+          dist/gh-actions-practice-${{ steps.get-latest-tag.outputs.tag }}.zip

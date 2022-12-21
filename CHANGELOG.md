@@ -1,3 +1,9 @@
+## [0.12.5] - 2022-12-21
+Small edit
+
+### Fixed
+Small refactor of name
+
 ## [0.12.4] - 2022-12-21
 Let's test from here.
 ### Fixed
