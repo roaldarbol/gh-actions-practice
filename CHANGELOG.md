@@ -1,3 +1,6 @@
+## [0.12.0] - 2022-12-21
+### Fixed
+Updated stuff
 ## [3.4.0] - 2020-07-10
 ### Added
 - Glob pattern support
