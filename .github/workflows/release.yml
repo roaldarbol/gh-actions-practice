@@ -1,8 +1,8 @@
 name: Release
 on:
   push:
-    branches:
-      - main
+    tags:
+      
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,11 +22,11 @@ jobs:
         cd release
         ls -la
 
-    - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        WITH_V: true
+    # - name: Bump version and push tag
+    #   uses: anothrNick/github-tag-action@master
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     WITH_V: true
     
     - uses: actions-ecosystem/action-get-latest-tag@v1
       id: get-latest-tag
@@ -39,7 +39,6 @@ jobs:
       uses: docker://antonyurchenko/git-release:latest
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GITHUB_REF: "refs/tags/${{ steps.get-latest-tag.outputs.tag }}"
         RELEASE_NAME: "gh-actions-practice ${{ steps.get-latest-tag.outputs.tag }}"
       with:
         args: |
