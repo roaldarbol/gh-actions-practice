@@ -20,7 +20,7 @@ jobs:
         fetch-depth: '0'
 
     - name: Create Release Folder
-      run: rsync -arv --exclude='.git/' --exclude='.github/' --exclude='.gitignore' . ./dist
+      run: rsync -arv --exclude='.git/' --exclude='.github/' --exclude='.gitignore' . ./release
     
     - name: Switch to Release Folder
       run: |
