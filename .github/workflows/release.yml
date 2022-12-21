@@ -12,15 +12,6 @@ jobs:
 
     - name: Checkout repository
       uses: actions/checkout@v3
-      with:
-        ref: ${{ github.sha }}
-        fetch-depth: '0'
-
-    - name: Get the tag
-      id: get_tag
-      run: |
-        echo ::set-output name=TAG::${GITHUB_REF/refs\/tags\//}
-        echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\/v/}
 
     - name: Create Release Folder
       run: rsync -arv --exclude='.git/' --exclude='.github/' --exclude='.gitignore' . ./release
@@ -35,6 +26,12 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: true
+
+    - name: Get tag
+      id: get_tag
+      run: |
+        echo "name=TAG::${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
+        echo "name=VERSION::${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
     
     - name: Release on Github
       uses: docker://antonyurchenko/git-release:v3
