@@ -20,7 +20,7 @@ jobs:
         fetch-depth: '0'
 
     - name: Create Release Folder
-      run: rsync -arv --exclude='.git/' --exclude='.github/' --exclude='.gitignore' . ./release
+      run: rsync -arv --exclude='.git/' --exclude='.github/' --exclude='.gitignore' . ./dist
     
     - name: Switch to Release Folder
       run: |
@@ -43,7 +43,6 @@ jobs:
       uses: docker://antonyurchenko/git-release:latest
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        ALLOW_TAG_PREFIX: "true"
         RELEASE_NAME: "gh-actions-practice version ${{ steps.get_tag.outputs.version }}"
       with:
         args: |
