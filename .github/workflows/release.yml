@@ -39,7 +39,7 @@ jobs:
       uses: docker://antonyurchenko/git-release:latest
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        RELEASE_NAME: "gh-actions-practice version ${{ steps.get-latest-tag.outputs.tag }}"
+        RELEASE_NAME: "gh-actions-practice ${{ steps.get-latest-tag.outputs.tag }}"
       with:
         args: |
           release/gh-actions-practice-${{ steps.get-latest-tag.outputs.tag }}.zip
