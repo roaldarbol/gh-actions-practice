@@ -46,4 +46,4 @@ jobs:
         RELEASE_NAME: "gh-actions-practice version ${{ steps.get_tag.outputs.version }}"
       with:
         args: |
-          dist/gh-actions-practice-${{ steps.get_tag.outputs.version }}.zip
+          release/gh-actions-practice-${{ steps.get_tag.outputs.version }}.zip
