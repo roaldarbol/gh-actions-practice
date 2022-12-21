@@ -1,8 +1,12 @@
 name: Release
 on:
-  push:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
     tags:
-    - "v[0-9]+.[0-9]+.[0-9]+"
+      - "v[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
   build:
@@ -36,11 +40,11 @@ jobs:
         echo "name=VERSION::${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
     
     - name: Release on Github
-      uses: docker://antonyurchenko/git-release:v3
+      uses: docker://antonyurchenko/git-release:latest
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ALLOW_TAG_PREFIX: "true"
-        RELEASE_NAME: "LaPreprint ${{ steps.get_tag.outputs.version }}"
+        RELEASE_NAME: "gh-actions-practice version ${{ steps.get_tag.outputs.version }}"
       with:
         args: |
           dist/gh-actions-practice-${{ steps.get_tag.outputs.version }}.zip
